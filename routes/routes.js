@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/models.js');
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 
 router.get(['/', '/index'], (req, res) => {
   res.render('index.njk');
@@ -26,11 +30,27 @@ router.get('/login', (req, res) => {
 //   });
 // });
 
+// Registration page
 router.get('/register', (req, res) => {
   res.render('register.njk');
 });
 
-router.post('')
+router.post('/register', (req, res) => {
+
+    var email = req.body.email;
+    var password = req.body.password;
+
+    //THIS IS VERY IMPORTANT
+    bcrypt.hash(myPlaintextPassword, saltRounds, function(err, hash) {
+        // Store hash in your password DB.
+        var user = new User({email: email, password: hash});
+        user.save(function (err, user) {
+            if (err) return handleError(err);
+        })
+    });
+
+    res.redirect('/');
+});
 
 router.get('/home', (req, res) => {
   res.render('home.njk');

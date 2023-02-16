@@ -1,0 +1,12 @@
+POST http://localhost/register HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@gmail.com",
+    "password": "pass",
+    "confirm_password": "pass"
+}
+
+###
+
+GET http://localhost/register HTTP/1.1
