@@ -8,7 +8,7 @@ Install npm dependencies
 `npm install`
 
 docker-compose up the mongo, and app containers
-`docker-compose --env-file ./.env -f Docker/docker-compose.yml up`
+`docker-compose --env-file ./.env -f docker-compose.yml up`
 
 Connect to mongo db locally using mongosh
 `mongodb://root:example@localhost:27017`

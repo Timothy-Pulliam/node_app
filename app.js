@@ -55,7 +55,6 @@ redisClient.on("connect", () => {
 //   }))
 
 // Database / mongodb
-const mongodb = require('mongodb');
 const mongoose = require('mongoose');
 const MONGO_HOST = process.env.MONGO_HOST;
 const MONGO_USER = encodeURIComponent(process.env.MONGO_USER);
@@ -68,7 +67,7 @@ mongoose.connect(mongoURI, {
 }).catch(function(reason) {
   console.log('Unable to connect to the mongodb instance. Error: ', reason);
 }).then(() => {
-    console.log('connected to Mongo successfully');
+    console.log('connected to mongo successfully');
 });
 
 //Bind connection to error event (to get notification of connection errors)

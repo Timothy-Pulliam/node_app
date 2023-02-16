@@ -42,10 +42,10 @@ router.post('/register', (req, res) => {
     bcrypt.hash(password, saltRounds, function(err, hash) {
         // Store hash in your password DB.
         var user = new User({username: username, email: email, password: hash});
+
         user.save(function (err, user) {
             if (err) return handleError(err);
         })
-    });
 
     res.redirect('/');
 });
