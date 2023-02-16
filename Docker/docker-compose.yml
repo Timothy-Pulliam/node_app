@@ -11,10 +11,10 @@ services:
       - backend
     ports:
       - "80:3000"
-    volumes:
-      - type: bind
-        source: ../
-        target: /usr/src/app
+    # volumes:
+    #   - type: bind
+    #     source: ../
+    #     target: /usr/src/app
   redis:
     image: "redis:alpine"
     container_name: redis

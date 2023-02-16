@@ -33,7 +33,7 @@ app.use(session({
     secret: process.env.SESSION_SECRET,
     name: '_redisSessionId',
     resave: false,
-    saveUnitialized: true,
+    saveUninitialized: true,
     cookie: {
       path: '/',
       httpOnly: true,

@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
     date: {type: Date, default: Date.now()}  
 });
 
-module.exports = mongoose.model("User", UserSchema);// Save a user
+module.exports = mongoose.model("User", UserSchema);
 
 // var tim = new User({ name: 'tim' });
 // tim.save(function (err) {
