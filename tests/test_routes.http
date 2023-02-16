@@ -2,6 +2,7 @@ POST http://localhost/register HTTP/1.1
 content-type: application/json
 
 {
+    "username": "test",
     "email": "test@gmail.com",
     "password": "pass",
     "confirm_password": "pass"

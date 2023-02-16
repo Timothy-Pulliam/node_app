@@ -22,31 +22,37 @@ nunjucks.configure('views', {
 });
 
 // Session / Redis
-const session = require('express-session');
+// const session = require('express-session');
 const redis = require('redis');
 const redisClient = redis.createClient({
   url: `redis://${process.env.REDIS_HOST}`
 });
-const redisStore = require('connect-redis')(session);
+redisClient.connect();
+redisClient.on('error', err => console.log('Redis Client Error', err));
+redisClient.on("connect", () => {
+    console.log("connected to redis successfully");
+});
 
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    name: '_redisSessionId',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      path: '/',
-      httpOnly: true,
-      secure: false,
-      maxAge: 60000 // 30 minutes
-    },
-    store: new redisStore({
-      host: process.env.REDIS_HOST,
-      port: 6379,
-      client: redisClient,
-      ttl: 86400
-    })
-  }))
+// const redisStore = require('connect-redis')(session);
+
+// app.use(session({
+//     secret: process.env.SESSION_SECRET,
+//     name: '_redisSessionId',
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//       path: '/',
+//       httpOnly: true,
+//       secure: false,
+//       maxAge: 60000 // 30 minutes
+//     },
+//     store: new redisStore({
+//       host: process.env.REDIS_HOST,
+//       port: 6379,
+//       client: redisClient,
+//       ttl: 86400
+//     })
+//   }))
 
 // Database / mongodb
 const mongodb = require('mongodb');
@@ -55,18 +61,18 @@ const MONGO_HOST = process.env.MONGO_HOST;
 const MONGO_USER = encodeURIComponent(process.env.MONGO_USER);
 const MONGO_PASSWORD = encodeURIComponent(process.env.MONGO_PASSWORD);
 const authMechanism = 'DEFAULT';
-const mongoURI = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:27017/app?authSource=admin"`;
+const mongoURI = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:27017/app?authSource=admin`;
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).catch(function(reason) {
   console.log('Unable to connect to the mongodb instance. Error: ', reason);
 }).then(() => {
-    console.log('Connected to Mongo successfully');
+    console.log('connected to Mongo successfully');
 });
 
-var db = mongoose.connection;
 //Bind connection to error event (to get notification of connection errors)
+var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Routes

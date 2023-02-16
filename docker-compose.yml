@@ -3,8 +3,8 @@ services:
   web:
     container_name: app
     build:
-      context: ../
-      dockerfile: Docker/Dockerfile.app
+      context: .
+      dockerfile: Dockerfile.app
     restart: always
     networks:
       - frontend
