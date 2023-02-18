@@ -10,4 +10,4 @@ EXPOSE 3000/tcp
 # start process as node user
 USER node
 # node is not designed to run as PID 1, use dumb init to start node
-CMD [ "dumb-init", "node", "app.js" ]
+CMD [ "dumb-init", "node", "backend/app.js" ]

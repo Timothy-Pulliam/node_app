@@ -21,3 +21,19 @@ content-type: application/json
     "email": "test@gmail.com",
     "password": "pass"
 }
+
+###
+
+POST http://localhost/user HTTP/1.1
+content-type: application/json
+
+{
+    "email": "test@gmail.com",
+    "username": "test@gmail.com",
+    "password": "password"
+}
+
+###
+
+GET http://localhost/users HTTP/1.1
+content-type: application/json
