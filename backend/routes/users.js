@@ -1,9 +1,10 @@
 const { body, validationResult } = require('express-validator');
 const User = require('../models/userModel');
+const express = require('express');
 const router = express.Router();
 
 // Get all users
-router.get('/users', (req, res) => {
+router.get('/', (req, res) => {
     User.find({}).exec(function (err, docs) {
         res.json(docs);
     });
@@ -11,7 +12,7 @@ router.get('/users', (req, res) => {
 
 // create a new user
 router.post(
-  '/user',
+  '/',
   // must be an email
   body('email').isEmail(),
   // password must be at least 5 chars long

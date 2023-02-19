@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const redis = require('redis');
+const nunjucks = require('nunjucks');
 // const parseurl = require('parseurl');
 // const cookieParser = require('cookie-parser');
 const colors = require('colors');
@@ -23,7 +24,6 @@ app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded()); // to support URL-encoded bodies
 
 // Templating
-const nunjucks = require('nunjucks');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.static('public'));
 nunjucks.configure('views', {
@@ -65,6 +65,18 @@ redisClient.on("connect", () => {
 
 // Routes
 var routes = require('./routes/routes.js');
+var gameRoutes = require('./routes/games');
+var userRoutes = require('./routes/users');
+app.use('/users', userRoutes);
+app.use('/games', gameRoutes);
+
+
+var devRoutes = require('./routes/dev');
+app.use('/dev', devRoutes);
+
+var streamRoutes = require('./routes/streams');
+app.use('/streams', streamRoutes);
+
 app.use('/', routes)
 
 const EXPRESS_PORT = process.env.EXPRESS_PORT;
