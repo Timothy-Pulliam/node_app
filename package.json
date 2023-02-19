@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js -e js,json,html,njk",
+    "dev": "nodemon backend/app.js -e js,json,html,njk",
     "test": "jest"
   },
   "author": "Tim Pulliam",

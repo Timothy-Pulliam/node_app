@@ -2,12 +2,20 @@ const { body, validationResult } = require('express-validator');
 const User = require('../models/userModel');
 const router = express.Router();
 
+// Get all users
+router.get('/users', (req, res) => {
+    User.find({}).exec(function (err, docs) {
+        res.json(docs);
+    });
+});
+
+// create a new user
 router.post(
   '/user',
   // must be an email
   body('email').isEmail(),
   // password must be at least 5 chars long
-  body('password').isLength({ min: 5 }),
+  body('password').isLength({ min: 6 }),
   (req, res) => {
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
@@ -16,7 +24,7 @@ router.post(
     }
 
     User.create({
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
     }).then(user => res.json(user));
   },

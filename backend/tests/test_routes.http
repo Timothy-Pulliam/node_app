@@ -28,8 +28,7 @@ POST http://localhost/user HTTP/1.1
 content-type: application/json
 
 {
-    "email": "test@gmail.com",
-    "username": "test@gmail.com",
+    "email": "test2@gmail.com",
     "password": "password"
 }
 

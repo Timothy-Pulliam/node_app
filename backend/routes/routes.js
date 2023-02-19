@@ -89,34 +89,34 @@ router.get('/home', (req, res) => {
 //   });
 
 
-const { body, validationResult } = require('express-validator');
+// const { body, validationResult } = require('express-validator');
 
-router.post(
-    '/user',
-    // must be an email
-    body('email').isEmail(),
-    // password must be at least 5 chars long
-    body('password').isLength({ min: 5 }),
-    (req, res) => {
-        // Finds the validation errors in this request and wraps them in an object with handy functions
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
+// router.post(
+//     '/user',
+//     // must be an email
+//     body('email').isEmail(),
+//     // password must be at least 5 chars long
+//     body('password').isLength({ min: 5 }),
+//     (req, res) => {
+//         // Finds the validation errors in this request and wraps them in an object with handy functions
+//         const errors = validationResult(req);
+//         if (!errors.isEmpty()) {
+//             return res.status(400).json({ errors: errors.array() });
+//         }
 
-        User.create({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-        }).then(user => res.json(user));
-    },
-);
+//         User.create({
+//             username: req.body.username,
+//             email: req.body.email,
+//             password: req.body.password,
+//         }).then(user => res.json(user));
+//     },
+// );
 
-router.get('/users', (req, res) => {
-    User.find({}).exec(function (err, docs) {
-        res.json(docs); // returns json
-    });
-});
+// router.get('/users', (req, res) => {
+//     User.find({}).exec(function (err, docs) {
+//         res.json(docs); // returns json
+//     });
+// });
 
 // Match all other urls
 router.get('*', function (req, res) {
